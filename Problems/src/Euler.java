@@ -8,15 +8,31 @@ import java.util.Scanner;
 public class Euler {
 	private static int height;
 	private static int width;
-	private char map[][] = new char[width][height];
+	private static char[][] map = new char[width][height];
+
+	private static Queue<Cell> queueX = new LinkedList<>();
+	private static Queue<Cell> queueO = new LinkedList<>();
 
 	static class Cell {
 		int row, col;
 		char symbol;
+		public Cell(){}
 		public Cell(int r, int c, char s) {
 			row = r;
 			col = c;
 			symbol = s;
+		}
+		public void setRow(int r){row = r;}
+		public void setCol(int c){col = c;}
+		public void setSymbol(char c){symbol = c;}
+		public int getRow(){
+			return row;
+		}
+		public int getCol(){
+			return col;
+		}
+		public char getSymbol(){
+			return symbol;
 		}
 	}
 
@@ -26,19 +42,87 @@ public class Euler {
 		int testCases = scanner.nextInt();
 		height = scanner.nextInt();
 		width = scanner.nextInt();
-		for (int lineCount = 0; lineCount < height; lineCount++){
-			matrixPoplation(scanner.nextLine().toCharArray(), lineCount);
+
+		//Get input for map
+
+		String input = scanner.nextLine();
+		for (int heightIndex = 0; heightIndex < height; heightIndex++){
+			for (int widthIndex = 0; widthIndex < width; widthIndex++){
+				char lineChar = input.charAt(widthIndex);
+				map[widthIndex][heightIndex] = lineChar;
+			}
 		}
-		Queue<Cell> queue = new LinkedList<>();
-		//starting node
-		int cellCount = 1;
-		queue.add(new Cell(0,0));
-		while (counter)
+
 	}
-	public static void matrixPoplation(char[] charArray, int lineCount){
-		//Populate the map...
-		for (int i = 0; i < width; i++){
-			map[i][lineCount] = charArray[i];
+
+	public static void mapSearch(){
+
+		for (int heightIndex = 0; heightIndex < height; heightIndex++){
+			for (int widthIndex = 0; widthIndex < width; widthIndex++){
+				char mapIndex = map[widthIndex][heightIndex];
+				Cell cell = new Cell(widthIndex, heightIndex, mapIndex);
+				if (cell.getSymbol() == 'O'){
+					//TODO Do something when we encounter an O
+					queueO.add(cell);
+					//Look at the neighbors of cell...
+					while (!queueO.isEmpty()){
+						//TODO Check to make sure that we don't go out of bounds
+
+						//Check the surrounding elements of each cell.
+						if (map[cell.getRow()-1][cell.getCol()] == 'O'){
+							Cell oCell = new Cell(cell.getRow()-1, cell.getCol(), 'O');
+							queueO.add(oCell);
+						}
+						if (map[cell.getRow()][cell.getCol()-1] == 'O'){
+							Cell oCell = new Cell(cell.getRow(), cell.getCol()-1, 'O');
+							queueO.add(oCell);
+						}
+						if (map[cell.getRow()+1][cell.getCol()] == 'O'){
+							Cell oCell = new Cell(cell.getRow()+1, cell.getCol(), 'O');
+							queueO.add(oCell);
+						}
+						if (map[cell.getRow()][cell.getCol()+1] == 'O'){
+							Cell oCell = new Cell(cell.getRow(), cell.getCol()+1, 'O');
+							queueO.add(oCell);
+						}
+
+						if (map[cell.getRow()-1][cell.getCol()] == 'X'){
+							Cell xCell= new Cell(cell.getRow()-1, cell.getCol(), 'X');
+							queueX.add(xCell);
+						}
+						if (map[cell.getRow()][cell.getCol()-1] == 'X'){
+							Cell xCell = new Cell(cell.getRow(), cell.getCol()-1, 'X');
+							queueX.add(xCell);
+						}
+						if (map[cell.getRow()+1][cell.getCol()] == 'X'){
+							Cell xCell = new Cell(cell.getRow()+1, cell.getCol(), 'X');
+							queueX.add(xCell);
+						}
+						if (map[cell.getRow()][cell.getCol()+1] == 'X'){
+							Cell xCell = new Cell(cell.getRow(), cell.getCol()+1, 'X');
+							queueX.add(xCell);
+						}
+						if (map[cell.getRow()+1][cell.getCol()] == 'X'){
+							Cell xCell = new Cell(cell.getRow()+1, cell.getCol(), 'X');
+							queueX.add(xCell);
+						}
+						//If we already visited this cell, it has been indicated with a '*'
+
+						cell.setSymbol('*');
+						queueO.remove();
+					}
+				}
+				else if (map[widthIndex][heightIndex] == 'X'){
+					//TODO Do something when we encounter a X
+					queueX.add(new Cell(0,0,'X'));
+				}
+				else{
+					//TODO Do something when we already visited that cell...
+
+				}
+			}
 		}
 	}
+
+
 }
