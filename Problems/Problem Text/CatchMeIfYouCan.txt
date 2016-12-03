@@ -1,0 +1,83 @@
+
+ Domains
+ Contests
+ Rank
+ Leaderboard
+ Jobs
+  annoytheworld
+
+All Contests  Contest Programming  Dickinson 2013: Catch Me If You Can!
+Dickinson 2013: Catch Me If You Can!
+by JeremyBlum
+Problem
+Submissions
+Leaderboard
+Discussions
+You are an FBI agent hot on the trail of a clever fraudster named Carmen. She is employing a variety of transportation methods to get from one city to the next: airplane, bus, ferry, taxi, and train. You’ve found a way to track what type of tickets she is purchasing. Use the information about the types of transportation available at different cities to figure out where Carmen has escaped to.
+
+Input Format
+
+Input consists of a table of all possible cities and modes of transportation between cities, followed by one or more problems.
+
+The first line contains a single integer n (0 < n ≤ 5000), denoting the number of transportation routes to follow. The following n lines each list a mode of transportation (one of airplane, bus, ferry, taxi, or train), a start city, and an end city, separated by spaces. Each city name is a string consisting of only numbers, letters, and the underscore. The end city is never identical to start city. City names appearing multiple times in the Input file will always have the same capitalization. There will no more than 500 unique city names.
+
+After the n lines listing available transportation, there will be a line containing a single integer m (0 < m ≤ 20), denoting the number of problems following.
+
+The following m lines list a starting city, then a space, then some number of transport modes (no more than 50, each one of airplane, bus, ferry, taxi, or train) each followed by a space, then the word stop.
+
+Output Format
+
+For each of the m problems given in the input, output on one line a list of possible cities for Carmen to be at, in alphabetical order, separated by spaces. If the input is such that the trip was not possible, then output just the word “Impossible”.
+
+Sample Input
+
+13
+taxi Carlisle Harrisburg
+airplane Harrisburg Baltimore
+bus Harrisburg York
+ferry Harrisburg Millersburg
+taxi Harrisburg Carlisle
+taxi Harrisburg York
+train Harrisburg Lancaster
+bus York Baltimore
+bus York Harrisburg
+airplane Baltimore Harrisburg
+bus Baltimore York
+ferry Millersburg Harrisburg
+train Lancaster Harrisburg
+4
+Carlisle taxi ferry ferry airplane bus stop
+Carlisle taxi bus bus stop
+Harrisburg stop
+Lancaster ferry bus stop
+Sample Output
+
+York
+Baltimore Harrisburg
+Harrisburg
+Impossible
+Explanation
+
+In this example, the following transportation types are available at the various cities in the region:
+
+From Carlisle: Taxi - to Harrisburg
+From Harrisburg: Airplane - to Baltimore; Bus - to York; Ferry - to Millersburg; Taxi - to Carlisle, or York; Train - to Lancaster
+From York: Bus - to Baltimore, or Harrisburg
+From Baltimore: Airplane - to Harrisburg; Bus - to York
+From Millersburg: Ferry - to Harrisburg
+From Lancaster: Train - to Harrisburg
+In the first query, you know that Carmen started in Carlisle, and made the following purchases during her trip:
+
+taxi fare
+ferry ticket
+ferry ticket
+airplane ticket
+bus ticket
+From this information, you can deduce that Carmen has traveled to York. (She starts in Carlisle, takes a taxi to Harrisburg, takes a ferry to Millersburg, takes a ferry back to Harrisburg, then takes an airplane to Baltimore, then rides a bus to York.)
+
+In the second query, she starts in Carlisle and purchases:
+
+taxi fare
+bus ticket
+bus ticket
+This time, you know Carmen ends up in either Baltimore or Harrisburg. (She starts in Carlisle, takes a taxi to Harrisburg, rides a bus to York, then rides on to Baltimore. Or, she starts in Carlisle, takes a taxi to Harrisburg, rides a bus to York, then rides a bus back to Harrisburg.)
