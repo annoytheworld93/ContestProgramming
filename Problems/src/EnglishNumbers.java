@@ -4,9 +4,13 @@ import java.util.Scanner;
  * Created by annoytheworld on 12/3/16.
  */
 public class EnglishNumbers {
+  public static String onesPlace[] ={"", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
+  public static String teensPlace[] = {"", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
+  public static String tensPlace[] = {"", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"};
+
     /**
      *
-     * @param inputNum
+     * @param inputNum a long representing the number to be translated to English.
      * @return a String that represents inputNum in spoken English.
      */
     public static String convert(long inputNum){
@@ -14,9 +18,25 @@ public class EnglishNumbers {
 
         String num = Long.toString(inputNum);
 
-        if (inputNum > 999999){
-            boolean numsAfterMillion = num.substring(3, 6).equals("000000");
-            if (numsAfterMillion){System.out.println("There are numbers after the millions.");}
+        //inputNum is in millions place
+        if (num.length() > 6){
+            boolean numsAfterMillion = !num.substring(3, 9).equals("000000");
+            //TODO figure out what strings to concat to retVal
+            if (numsAfterMillion){
+              System.out.println("There are numbers after the millions.");
+              //need to add comma after million
+              retVal = retVal.concat(",");
+            }
+        }
+        //inputNum is in the thousands place
+        else if (num.length() > 3 && num.length() < 7){
+          boolean numsAfterThousand = !num.substring(3, 6).equals("000");
+          //TODO figure out what strings to concat to retval
+          if (numsAfterThousand) {
+            System.out.println("There are numbers after the thousands");
+            //need to add comma after thousand
+            retVal = retVal.concat(", ");
+          }
         }
 
 
