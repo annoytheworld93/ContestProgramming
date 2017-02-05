@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -6,6 +5,7 @@ import java.util.stream.Stream;
 
 /**
  * Created by will on 1/18/17.
+ * FizzBuzzWhammy Contest Programming Problem
  */
 public class FizzBuzzWhammy {
   public static void main(String[] args){
@@ -45,23 +45,31 @@ public class FizzBuzzWhammy {
   public static void solution(long fizz, long buzz, long fizzbuzz, long whammy, long finalNum){
     //Count to the finalNum+1
     for (int i = 1; i< finalNum+1; i++){
+
       if (i % whammy == 0) {
-        while((i % fizz != 0 || i % fizzbuzz != 0) && i != finalNum) {
+        System.out.println("Got a whammy");
+        while(i % fizz != 0 && i != finalNum) {
           System.out.println("Whammy");
-          i = i+1;
+          i++;
         }
       }
-      else if (i % fizzbuzz == 0) {
+
+
+      if (i % fizzbuzz == 0) {
         System.out.println("FizzBuzz");
       }
-      else if (i % fizz == 0)
+      else if (i % fizz == 0) {
         System.out.println("Fizz");
-      else if (i % buzz == 0)
+      }
+
+      else if (i % buzz == 0) {
         System.out.println("Buzz");
+      }
 
       else {
         System.out.println(i);
       }
+
     }
     System.out.println("Done");
   }
